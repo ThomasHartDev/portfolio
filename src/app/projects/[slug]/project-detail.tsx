@@ -5,41 +5,9 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Badge } from "@/components/ui/badge";
+import { FadeIn } from "@/components/ui/fade-in";
+import { ArchitectureDiagram } from "@/components/projects/architecture-diagram";
 import type { Project } from "@/data/projects";
-
-/* ─── Scroll-triggered fade in ─── */
-function FadeIn({
-  children,
-  className,
-  delay = 0,
-  direction = "up",
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-  direction?: "up" | "left" | "right" | "none";
-}) {
-  const offset =
-    direction === "up"
-      ? { y: 40 }
-      : direction === "left"
-        ? { x: -40 }
-        : direction === "right"
-          ? { x: 40 }
-          : {};
-
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, ...offset }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 /* ─── Parallax image with reveal ─── */
 function ParallaxImage({
@@ -266,6 +234,11 @@ export default function ProjectDetail({
             />
           </div>
         </div>
+      )}
+
+      {/* ── Architecture Diagram ── */}
+      {project.architecture && (
+        <ArchitectureDiagram architecture={project.architecture} />
       )}
 
       {/* ── Highlights Section ── */}
