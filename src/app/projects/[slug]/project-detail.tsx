@@ -124,13 +124,13 @@ export default function ProjectDetail({
     <div className="relative">
       {/* ── Cinematic Hero ── */}
       <div ref={heroRef} className="relative h-[70vh] min-h-[500px] overflow-hidden">
-        {project.image ? (
+        {project.heroImage ? (
           <motion.div className="absolute inset-0" style={{ y: heroY }}>
             <Image
-              src={project.image}
+              src={project.heroImage}
               alt={project.title}
               fill
-              className="object-cover object-top"
+              className="object-cover object-center"
               priority
             />
           </motion.div>

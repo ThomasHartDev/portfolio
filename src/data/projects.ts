@@ -8,6 +8,7 @@ export interface Project {
   category: "saas" | "ecommerce" | "data" | "ai" | "tooling";
   featured: boolean;
   image: string;
+  heroImage?: string;
   gallery: string[];
   liveUrl?: string;
   githubUrl?: string;
@@ -175,6 +176,7 @@ export const projects: Project[] = [
     category: "ecommerce",
     featured: false,
     image: "/images/projects/office-aesthetics-screenshot.png",
+    heroImage: "/images/projects/OfficePic3.jpg",
     liveUrl: "https://oa-zeta.vercel.app",
     gallery: [
       "/images/projects/oa-blog.png",
@@ -212,6 +214,7 @@ export const projects: Project[] = [
     category: "ecommerce",
     featured: false,
     image: "/images/projects/national-auto-hub.png",
+    heroImage: "/images/projects/Car1.png",
     liveUrl: "https://nah-delta.vercel.app",
     gallery: [
       "/images/projects/Car1.png",
@@ -247,6 +250,7 @@ export const projects: Project[] = [
     category: "tooling",
     featured: false,
     image: "/images/projects/subsource-screenshot.png",
+    heroImage: "/images/projects/LoginBG.jpg",
     liveUrl: "https://subsource.vercel.app",
     gallery: [
       "/images/projects/subsource-articles.png",
