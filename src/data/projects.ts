@@ -50,38 +50,6 @@ export const projects: Project[] = [
     status: "active",
   },
   {
-    slug: "day-trader",
-    title: "Day Trader",
-    tagline: "AI-powered algorithmic trading system",
-    description:
-      "An autonomous trading system with machine learning models, event-driven strategies, backtesting infrastructure, and live market execution. Built in Python with extensive data pipelines and model training workflows.",
-    longDescription:
-      "This project is a full algorithmic trading platform — from data ingestion and feature engineering through model training, backtesting, and live execution. It uses ensemble ML models trained on historical market data combined with event-driven signals from news pipelines. The backtesting framework simulates realistic market conditions including slippage and commission. The live trader connects to brokerage APIs for real-time execution with position management, stop-losses, and portfolio rebalancing. Everything runs as background processes with monitoring and alerting.",
-    techStack: [
-      "Python",
-      "scikit-learn",
-      "pandas",
-      "NumPy",
-      "Docker",
-      "REST APIs",
-      "PostgreSQL",
-      "Redis",
-    ],
-    category: "ai",
-    featured: true,
-    image: "",
-    gallery: [],
-    highlights: [
-      "Ensemble ML models with automated training and evaluation",
-      "Event-driven strategy engine processing real-time news signals",
-      "Full backtesting framework with realistic market simulation",
-      "Live execution with position management and risk controls",
-      "Dockerized deployment with background workers and monitoring",
-    ],
-    year: "2024–2026",
-    status: "active",
-  },
-  {
     slug: "murderdata",
     title: "MurderData",
     tagline: "Interactive homicide data exploration platform",
@@ -101,7 +69,7 @@ export const projects: Project[] = [
     ],
     category: "data",
     featured: true,
-    image: "",
+    image: "/images/projects/murderdata.png",
     gallery: [],
     highlights: [
       "Interactive choropleth maps with drill-down by state and county",
@@ -175,7 +143,7 @@ export const projects: Project[] = [
     ],
     category: "tooling",
     featured: true,
-    image: "",
+    image: "/images/projects/perception.png",
     gallery: [],
     highlights: [
       "Interactive 3D body maps with WebGL rendering",
@@ -209,7 +177,6 @@ export const projects: Project[] = [
     image: "/images/projects/office-aesthetics-screenshot.png",
     liveUrl: "https://oa-zeta.vercel.app",
     gallery: [
-      "/images/projects/oa-shop.png",
       "/images/projects/oa-blog.png",
       "/images/projects/OfficePic3.jpg",
       "/images/projects/OfficePic6.jpg",
@@ -244,12 +211,12 @@ export const projects: Project[] = [
     ],
     category: "ecommerce",
     featured: false,
-    image: "/images/projects/national-auto-hub.webp",
+    image: "/images/projects/national-auto-hub.png",
+    liveUrl: "https://nah-delta.vercel.app",
     gallery: [
       "/images/projects/Car1.png",
       "/images/projects/Car2.png",
       "/images/projects/Car3.png",
-      "/images/projects/MobileBG.png",
     ],
     highlights: [
       "Full ecommerce flow — browse, cart, checkout, order tracking",
