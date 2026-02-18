@@ -39,7 +39,8 @@ export const projects: Project[] = [
     category: "saas",
     featured: true,
     image: "/images/projects/pixel-wand.png",
-    gallery: [],
+    heroImage: "/images/projects/pixelwand-hero.png",
+    gallery: ["/images/logos/pixel-wand.png"],
     highlights: [
       "Full SaaS with Stripe subscriptions and usage-based billing",
       "Developer API with key management and rate limiting",
@@ -71,6 +72,7 @@ export const projects: Project[] = [
     category: "data",
     featured: true,
     image: "/images/projects/murderdata.png",
+    heroImage: "/images/projects/murderdata-hero.jpg",
     gallery: [],
     highlights: [
       "Interactive choropleth maps with drill-down by state and county",
@@ -102,19 +104,9 @@ export const projects: Project[] = [
     category: "ecommerce",
     featured: true,
     image: "/images/projects/hartecho-live.png",
+    heroImage: "/images/projects/hartecho-hero.webp",
     liveUrl: "https://hartecho.com",
-    gallery: [
-      "/images/projects/hartecho-blog.png",
-      "/images/projects/hartecho-site.webp",
-      "/images/projects/KipCoverDark.webp",
-      "/images/projects/Kip1.webp",
-      "/images/projects/Kip2.webp",
-      "/images/projects/BhCoverDark.webp",
-      "/images/projects/bh1.webp",
-      "/images/projects/bh3.webp",
-      "/images/projects/SS1.webp",
-      "/images/projects/subsource.webp",
-    ],
+    gallery: ["/images/logos/hartecho.webp"],
     highlights: [
       "Full marketing site with SEO optimization and dynamic portfolio",
       "Customer portal with project tracking and invoice management",
@@ -145,6 +137,7 @@ export const projects: Project[] = [
     category: "tooling",
     featured: true,
     image: "/images/projects/perception.png",
+    heroImage: "/images/projects/perception-hero.jpg",
     gallery: [],
     highlights: [
       "Interactive 3D body maps with WebGL rendering",
@@ -179,8 +172,7 @@ export const projects: Project[] = [
     heroImage: "/images/projects/OfficePic3.jpg",
     liveUrl: "https://oa-zeta.vercel.app",
     gallery: [
-      "/images/projects/oa-blog.png",
-      "/images/projects/OfficePic3.jpg",
+      "/images/logos/office-aesthetics.webp",
       "/images/projects/OfficePic6.jpg",
       "/images/projects/OfficePic7.jpg",
     ],
@@ -216,11 +208,7 @@ export const projects: Project[] = [
     image: "/images/projects/national-auto-hub.png",
     heroImage: "/images/projects/Car1.png",
     liveUrl: "https://nah-delta.vercel.app",
-    gallery: [
-      "/images/projects/Car1.png",
-      "/images/projects/Car2.png",
-      "/images/projects/Car3.png",
-    ],
+    gallery: ["/images/projects/Car2.png", "/images/projects/Car3.png"],
     highlights: [
       "Full ecommerce flow — browse, cart, checkout, order tracking",
       "PayPal payment integration with order confirmation",
@@ -253,12 +241,9 @@ export const projects: Project[] = [
     heroImage: "/images/projects/LoginBG.jpg",
     liveUrl: "https://subsource.vercel.app",
     gallery: [
-      "/images/projects/subsource-articles.png",
+      "/images/logos/subsource.png",
       "/images/projects/aboutPic.webp",
-      "/images/projects/LoginBG.jpg",
-      "/images/projects/SS5.webp",
-      "/images/projects/SS6.webp",
-      "/images/projects/SS7.webp",
+      "/images/projects/subsource.webp",
     ],
     highlights: [
       "Verified review system with purchase receipt validation",
@@ -289,12 +274,9 @@ export const projects: Project[] = [
     category: "saas",
     featured: false,
     image: "/images/projects/custom-software-site.png",
+    heroImage: "/images/projects/css-hero.webp",
     liveUrl: "https://custom-software-site.vercel.app",
-    gallery: [
-      "/images/projects/css-services.png",
-      "/images/projects/css-work.png",
-      "/images/projects/css-about.png",
-    ],
+    gallery: [],
     highlights: [
       "Conversion-optimized design with case studies and social proof",
       "Client onboarding flow with form validation and intake pipeline",
