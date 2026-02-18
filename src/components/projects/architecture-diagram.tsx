@@ -59,7 +59,9 @@ function TechNode({
     >
       <span className={`text-sm font-medium ${c.text}`}>{label}</span>
       {description && (
-        <span className="ml-1.5 text-xs text-neutral-500">{description}</span>
+        <span className="ml-1.5 hidden text-xs text-neutral-500 sm:inline">
+          {description}
+        </span>
       )}
     </div>
   );
