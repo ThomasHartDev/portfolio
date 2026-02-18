@@ -1,3 +1,23 @@
+export interface TechNode {
+  label: string;
+  description?: string;
+}
+
+export interface ArchitectureLayer {
+  name: string;
+  color: "indigo" | "emerald" | "amber" | "purple";
+  nodes: TechNode[];
+}
+
+export interface ArchitectureFlow {
+  label: string;
+}
+
+export interface Architecture {
+  layers: ArchitectureLayer[];
+  flows: ArchitectureFlow[];
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -15,6 +35,7 @@ export interface Project {
   highlights: string[];
   year: string;
   status: "active" | "completed" | "in-development";
+  architecture?: Architecture;
 }
 
 export const projects: Project[] = [
@@ -50,6 +71,51 @@ export const projects: Project[] = [
     ],
     year: "2025",
     status: "active",
+    architecture: {
+      layers: [
+        {
+          name: "Client",
+          color: "indigo",
+          nodes: [
+            { label: "Next.js", description: "App Router + RSC" },
+            { label: "Tailwind CSS", description: "Utility styling" },
+            { label: "React Components", description: "Conversion UI" },
+          ],
+        },
+        {
+          name: "API",
+          color: "emerald",
+          nodes: [
+            { label: "API Routes", description: "Next.js handlers" },
+            { label: "Stripe Webhooks", description: "Subscription events" },
+            { label: "Zod", description: "Request validation" },
+          ],
+        },
+        {
+          name: "Services",
+          color: "amber",
+          nodes: [
+            { label: "Sharp", description: "Image processing" },
+            { label: "Stripe", description: "Billing & subscriptions" },
+            { label: "API Key Manager", description: "Rate limiting" },
+          ],
+        },
+        {
+          name: "Data",
+          color: "purple",
+          nodes: [
+            { label: "Prisma", description: "ORM layer" },
+            { label: "Cloudflare R2", description: "Object storage" },
+            { label: "PostgreSQL", description: "User & billing data" },
+          ],
+        },
+      ],
+      flows: [
+        { label: "Presigned Upload" },
+        { label: "Processing Pipeline" },
+        { label: "Stored Assets" },
+      ],
+    },
   },
   {
     slug: "murderdata",
@@ -83,6 +149,49 @@ export const projects: Project[] = [
     ],
     year: "2025–2026",
     status: "active",
+    architecture: {
+      layers: [
+        {
+          name: "Client",
+          color: "indigo",
+          nodes: [
+            { label: "Next.js", description: "App Router + SSR" },
+            { label: "D3.js", description: "Choropleth maps" },
+            { label: "Tailwind CSS", description: "Responsive layout" },
+          ],
+        },
+        {
+          name: "API",
+          color: "emerald",
+          nodes: [
+            { label: "API Routes", description: "Data endpoints" },
+            { label: "Zod", description: "Query validation" },
+          ],
+        },
+        {
+          name: "Services",
+          color: "amber",
+          nodes: [
+            { label: "Aggregation Engine", description: "800K+ record queries" },
+            { label: "Cache Layer", description: "Result memoization" },
+            { label: "Provenance Tracker", description: "Edit history" },
+          ],
+        },
+        {
+          name: "Data",
+          color: "purple",
+          nodes: [
+            { label: "PostgreSQL", description: "FBI dataset + user data" },
+            { label: "Prisma", description: "Type-safe queries" },
+          ],
+        },
+      ],
+      flows: [
+        { label: "Filtered Queries" },
+        { label: "Aggregated Results" },
+        { label: "Indexed Lookups" },
+      ],
+    },
   },
   {
     slug: "hartecho-site",
@@ -116,6 +225,49 @@ export const projects: Project[] = [
     ],
     year: "2023–2026",
     status: "active",
+    architecture: {
+      layers: [
+        {
+          name: "Client",
+          color: "indigo",
+          nodes: [
+            { label: "Nuxt 3", description: "SSR + hydration" },
+            { label: "Vue 3", description: "Composition API" },
+            { label: "Tailwind CSS", description: "Design system" },
+          ],
+        },
+        {
+          name: "API",
+          color: "emerald",
+          nodes: [
+            { label: "Server Routes", description: "Nuxt API layer" },
+            { label: "AWS Lambda", description: "Serverless functions" },
+          ],
+        },
+        {
+          name: "Services",
+          color: "amber",
+          nodes: [
+            { label: "Blog Engine", description: "Content management" },
+            { label: "Customer Portal", description: "Project tracking" },
+            { label: "Invoice System", description: "Billing & payments" },
+          ],
+        },
+        {
+          name: "Data",
+          color: "purple",
+          nodes: [
+            { label: "MongoDB", description: "Document store" },
+            { label: "AWS S3", description: "Asset storage" },
+          ],
+        },
+      ],
+      flows: [
+        { label: "SSR Requests" },
+        { label: "Lambda Invocations" },
+        { label: "Document Queries" },
+      ],
+    },
   },
   {
     slug: "perception",
@@ -148,6 +300,49 @@ export const projects: Project[] = [
     ],
     year: "2025–2026",
     status: "active",
+    architecture: {
+      layers: [
+        {
+          name: "Client",
+          color: "indigo",
+          nodes: [
+            { label: "Next.js", description: "App Router" },
+            { label: "Three.js", description: "3D body maps" },
+            { label: "D3.js", description: "Radar charts" },
+          ],
+        },
+        {
+          name: "Rendering",
+          color: "emerald",
+          nodes: [
+            { label: "WebGL", description: "GPU-accelerated 3D" },
+            { label: "Canvas API", description: "Paint interactions" },
+          ],
+        },
+        {
+          name: "Processing",
+          color: "amber",
+          nodes: [
+            { label: "Zod", description: "Schema validation" },
+            { label: "Emotion Mapping", description: "Body region analysis" },
+            { label: "Dimension Scoring", description: "Relationship metrics" },
+          ],
+        },
+        {
+          name: "Data",
+          color: "purple",
+          nodes: [
+            { label: "IndexedDB", description: "Local persistence" },
+            { label: "LocalStorage", description: "Session state" },
+          ],
+        },
+      ],
+      flows: [
+        { label: "WebGL Render Loop" },
+        { label: "Touch Events" },
+        { label: "Local Writes" },
+      ],
+    },
   },
   {
     slug: "office-aesthetics",
@@ -185,6 +380,49 @@ export const projects: Project[] = [
     ],
     year: "2024–2026",
     status: "active",
+    architecture: {
+      layers: [
+        {
+          name: "Client",
+          color: "indigo",
+          nodes: [
+            { label: "Nuxt 3", description: "SSR storefront" },
+            { label: "Vue 3", description: "Composition API" },
+            { label: "Tailwind CSS", description: "Product layouts" },
+          ],
+        },
+        {
+          name: "API",
+          color: "emerald",
+          nodes: [
+            { label: "Server Routes", description: "Product & cart API" },
+            { label: "PayPal API", description: "Payment processing" },
+          ],
+        },
+        {
+          name: "Services",
+          color: "amber",
+          nodes: [
+            { label: "Affiliate Engine", description: "Link tracking" },
+            { label: "Wishlist Manager", description: "User preferences" },
+            { label: "Review System", description: "Verified reviews" },
+          ],
+        },
+        {
+          name: "Data",
+          color: "purple",
+          nodes: [
+            { label: "MongoDB", description: "Product catalog" },
+            { label: "AWS S3", description: "Product images" },
+          ],
+        },
+      ],
+      flows: [
+        { label: "Cart Operations" },
+        { label: "Payment Flow" },
+        { label: "Catalog Queries" },
+      ],
+    },
   },
   {
     slug: "national-auto-hub",
@@ -218,6 +456,49 @@ export const projects: Project[] = [
     ],
     year: "2024–2025",
     status: "active",
+    architecture: {
+      layers: [
+        {
+          name: "Client",
+          color: "indigo",
+          nodes: [
+            { label: "Nuxt 3", description: "SSR + SEO" },
+            { label: "Vue 3", description: "Composition API" },
+            { label: "Tailwind CSS", description: "Responsive UI" },
+          ],
+        },
+        {
+          name: "API",
+          color: "emerald",
+          nodes: [
+            { label: "Server Routes", description: "Nuxt API layer" },
+            { label: "PayPal API", description: "Checkout integration" },
+            { label: "AWS Lambda", description: "Background tasks" },
+          ],
+        },
+        {
+          name: "Services",
+          color: "amber",
+          nodes: [
+            { label: "Inventory Manager", description: "Stock tracking" },
+            { label: "Order Pipeline", description: "Fulfillment flow" },
+            { label: "Affiliate System", description: "Referral payouts" },
+          ],
+        },
+        {
+          name: "Data",
+          color: "purple",
+          nodes: [
+            { label: "MongoDB", description: "Product & order data" },
+          ],
+        },
+      ],
+      flows: [
+        { label: "REST Endpoints" },
+        { label: "Payment Callbacks" },
+        { label: "Document Queries" },
+      ],
+    },
   },
   {
     slug: "subsource",
@@ -254,6 +535,48 @@ export const projects: Project[] = [
     ],
     year: "2024–2025",
     status: "active",
+    architecture: {
+      layers: [
+        {
+          name: "Client",
+          color: "indigo",
+          nodes: [
+            { label: "Nuxt 3", description: "SSR rendering" },
+            { label: "Vue 3", description: "Reactive components" },
+            { label: "Tailwind CSS", description: "Utility styles" },
+          ],
+        },
+        {
+          name: "API",
+          color: "emerald",
+          nodes: [
+            { label: "Server Routes", description: "Review endpoints" },
+            { label: "Verification API", description: "Receipt validation" },
+          ],
+        },
+        {
+          name: "Services",
+          color: "amber",
+          nodes: [
+            { label: "Review Engine", description: "Rating aggregation" },
+            { label: "Comparison Builder", description: "Side-by-side diffs" },
+            { label: "Credibility Scorer", description: "User trust metrics" },
+          ],
+        },
+        {
+          name: "Data",
+          color: "purple",
+          nodes: [
+            { label: "MongoDB", description: "Reviews & products" },
+          ],
+        },
+      ],
+      flows: [
+        { label: "REST API" },
+        { label: "Aggregation Pipelines" },
+        { label: "Document Lookups" },
+      ],
+    },
   },
   {
     slug: "custom-software-site",
@@ -286,5 +609,47 @@ export const projects: Project[] = [
     ],
     year: "2025–2026",
     status: "active",
+    architecture: {
+      layers: [
+        {
+          name: "Client",
+          color: "indigo",
+          nodes: [
+            { label: "Next.js", description: "App Router + SSR" },
+            { label: "Framer Motion", description: "Page transitions" },
+            { label: "Tailwind CSS", description: "Design tokens" },
+          ],
+        },
+        {
+          name: "API",
+          color: "emerald",
+          nodes: [
+            { label: "API Routes", description: "Contact & intake" },
+            { label: "Zod", description: "Form validation" },
+          ],
+        },
+        {
+          name: "Services",
+          color: "amber",
+          nodes: [
+            { label: "Contact Pipeline", description: "Lead routing" },
+            { label: "Portfolio Engine", description: "Dynamic case studies" },
+          ],
+        },
+        {
+          name: "Data",
+          color: "purple",
+          nodes: [
+            { label: "Vercel Edge Config", description: "Runtime config" },
+            { label: "Static Assets", description: "Image CDN" },
+          ],
+        },
+      ],
+      flows: [
+        { label: "Form Submissions" },
+        { label: "Email Dispatch" },
+        { label: "Edge Reads" },
+      ],
+    },
   },
 ];
