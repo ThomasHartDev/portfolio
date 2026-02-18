@@ -2,18 +2,33 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 export async function POST(request: Request) {
+  const requestId = crypto.randomUUID().slice(0, 8);
+
   try {
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
+      console.error(`[contact:${requestId}] RESEND_API_KEY not configured`);
       return NextResponse.json(
         { error: "Email service not configured" },
         { status: 500 },
       );
     }
 
-    const { name, email, message } = await request.json();
+    const body = await request.json();
+    const { name, email, message } = body;
+
+    console.log(`[contact:${requestId}] Incoming request`, {
+      name,
+      email,
+      messageLength: message?.length ?? 0,
+    });
 
     if (!name || !email || !message) {
+      console.warn(`[contact:${requestId}] Validation failed — missing fields`, {
+        hasName: !!name,
+        hasEmail: !!email,
+        hasMessage: !!message,
+      });
       return NextResponse.json(
         { error: "All fields are required" },
         { status: 400 },
@@ -22,7 +37,9 @@ export async function POST(request: Request) {
 
     const resend = new Resend(apiKey);
 
-    await resend.emails.send({
+    console.log(`[contact:${requestId}] Sending email via Resend...`);
+
+    const { data, error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: "thomashartdev@gmail.com",
       replyTo: email,
@@ -39,10 +56,31 @@ export async function POST(request: Request) {
       `,
     });
 
-    return NextResponse.json({ success: true });
-  } catch {
+    if (error) {
+      console.error(`[contact:${requestId}] Resend API error`, {
+        error: error.message,
+        name: error.name,
+      });
+      return NextResponse.json(
+        { error: `Email delivery failed: ${error.message}` },
+        { status: 500 },
+      );
+    }
+
+    console.log(`[contact:${requestId}] Email sent successfully`, {
+      emailId: data?.id,
+    });
+
+    return NextResponse.json({ success: true, id: data?.id });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    const stack = err instanceof Error ? err.stack : undefined;
+    console.error(`[contact:${requestId}] Unhandled error`, {
+      message,
+      stack,
+    });
     return NextResponse.json(
-      { error: "Failed to send message" },
+      { error: `Internal error: ${message}` },
       { status: 500 },
     );
   }
