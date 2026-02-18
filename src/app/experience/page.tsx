@@ -3,17 +3,48 @@
 import { motion } from "framer-motion";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
-import { experience, education } from "@/data/experience";
+import { experience, education, skills } from "@/data/experience";
+
+const categoryLabels: Record<string, string> = {
+  languages: "Languages",
+  frontend: "Frontend",
+  backend: "Backend",
+  databases: "Databases & ORMs",
+  infrastructure: "Infrastructure",
+  tools: "Tools & Integrations",
+};
 
 export default function ExperiencePage() {
   return (
     <div className="pt-20">
       <Section>
-        <SectionHeader
-          label="Career"
-          title="Experience & Education"
-          description="From studying computer science at BYU to co-founding a software company to shipping enterprise-scale products."
-        />
+        <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeader
+            label="Career"
+            title="Experience & Education"
+            description="From studying computer science at BYU to co-founding a software company to shipping enterprise-scale products."
+          />
+          <a
+            href="/thomas-hart-resume.pdf"
+            download
+            className="inline-flex flex-shrink-0 items-center gap-2 self-start rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-[0_0_30px_rgba(99,102,241,0.3)]"
+          >
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            Download Resume
+          </a>
+        </div>
 
         <div className="space-y-20">
           <div>
@@ -106,6 +137,35 @@ export default function ExperiencePage() {
                 )}
               </motion.div>
             ))}
+          </div>
+          {/* Technical Skills */}
+          <div>
+            <h3 className="mb-10 text-sm font-semibold uppercase tracking-widest text-indigo-400">
+              Technical Skills
+            </h3>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {Object.entries(skills).map(([category, items], i) => (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  className="rounded-xl border border-neutral-800/50 bg-neutral-900/30 p-5"
+                >
+                  <h4 className="mb-3 text-xs font-medium uppercase tracking-widest text-neutral-500">
+                    {categoryLabels[category] ?? category}
+                  </h4>
+                  <div className="flex flex-wrap gap-1.5">
+                    {items.map((skill) => (
+                      <Badge key={skill} variant="outline">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </Section>
