@@ -78,7 +78,7 @@ export function ArchitectureDiagram({
   }, [architecture.edges]);
 
   useEffect(() => {
-    const timer = setTimeout(recalculate, 250);
+    const timer = setTimeout(recalculate, 300);
     const observer = new ResizeObserver(recalculate);
     if (containerRef.current) observer.observe(containerRef.current);
     return () => {
@@ -97,27 +97,31 @@ export function ArchitectureDiagram({
           <div className="mb-10 h-px w-12 bg-gradient-to-r from-indigo-500 to-transparent" />
         </FadeIn>
 
-        <div ref={containerRef} className="relative">
+        <div
+          ref={containerRef}
+          className="relative rounded-2xl border border-neutral-800/50 bg-neutral-950 p-6 md:p-10"
+        >
+          {/* Subtle dot grid background */}
+          <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle,_rgba(255,255,255,0.04)_1px,_transparent_1px)] bg-[size:20px_20px]" />
+
           {/* SVG edges — desktop only */}
           <svg
-            className={`pointer-events-none absolute inset-0 z-10 hidden h-full w-full transition-opacity duration-700 md:block ${measured ? "opacity-100" : "opacity-0"}`}
+            className={`pointer-events-none absolute inset-0 z-10 hidden h-full w-full transition-opacity duration-500 md:block ${measured ? "opacity-100" : "opacity-0"}`}
             style={{ overflow: "visible" }}
           >
             <defs>
               <marker
                 id="arch-arrow"
-                viewBox="0 0 10 8"
-                refX="10"
-                refY="4"
-                markerWidth="8"
-                markerHeight="6"
-                orient="auto"
+                viewBox="0 0 10 7"
+                refX="9"
+                refY="3.5"
+                markerWidth="10"
+                markerHeight="7"
+                orient="auto-start-reverse"
               >
-                <path
-                  d="M 0 0 L 10 4 L 0 8"
-                  fill="none"
-                  stroke="rgb(99 102 241 / 0.4)"
-                  strokeWidth="1.5"
+                <polygon
+                  points="0 0, 10 3.5, 0 7"
+                  fill="rgb(129 140 248 / 0.6)"
                 />
               </marker>
             </defs>
@@ -126,13 +130,20 @@ export function ArchitectureDiagram({
                 key={i}
                 d={edge.d}
                 fill="none"
-                stroke="rgb(99 102 241 / 0.25)"
-                strokeWidth={1.5}
+                stroke="rgb(129 140 248 / 0.4)"
+                strokeWidth={2}
                 markerEnd="url(#arch-arrow)"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                initial={{ pathLength: 0, opacity: 0 }}
+                whileInView={{ pathLength: 1, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.6 + i * 0.08 }}
+                transition={{
+                  pathLength: {
+                    duration: 0.8,
+                    delay: 0.5 + i * 0.1,
+                    ease: "easeInOut",
+                  },
+                  opacity: { duration: 0.3, delay: 0.5 + i * 0.1 },
+                }}
               />
             ))}
           </svg>
@@ -144,12 +155,12 @@ export function ArchitectureDiagram({
                 edge.label && (
                   <motion.div
                     key={`label-${i}`}
-                    className="pointer-events-none absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 rounded-full border border-neutral-800 bg-neutral-950/90 px-2.5 py-0.5 text-[10px] font-medium text-neutral-500 md:block"
+                    className="pointer-events-none absolute z-20 hidden -translate-x-1/2 -translate-y-1/2 rounded-full border border-neutral-700/60 bg-neutral-900 px-2.5 py-0.5 text-[10px] font-medium text-neutral-400 md:block"
                     style={{ left: edge.labelX, top: edge.labelY }}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.8 + i * 0.08 }}
+                    transition={{ duration: 0.4, delay: 1 + i * 0.08 }}
                   >
                     {edge.label}
                   </motion.div>
@@ -158,7 +169,7 @@ export function ArchitectureDiagram({
 
           {/* 2D Node Grid — 5 columns, N rows */}
           <div
-            className="hidden md:grid"
+            className="relative z-20 hidden md:grid"
             style={{
               gridTemplateColumns: "repeat(5, 1fr)",
               gridTemplateRows: `repeat(${rowCount}, auto)`,
@@ -171,12 +182,12 @@ export function ArchitectureDiagram({
                 ref={(el) => {
                   if (el) nodeRefs.current.set(node.id, el);
                 }}
-                className="relative z-20 flex items-center justify-center rounded-xl border border-neutral-700/40 bg-neutral-900/80 px-4 py-3 text-center backdrop-blur-sm transition-all duration-300 hover:border-indigo-500/30 hover:shadow-[0_0_20px_rgba(99,102,241,0.1)]"
+                className="flex items-center justify-center rounded-xl border border-neutral-700/50 bg-neutral-900 px-4 py-3 text-center shadow-lg shadow-black/20 transition-all duration-300 hover:border-indigo-500/40 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)]"
                 style={{
                   gridRow: node.row + 1,
                   gridColumn: node.col,
                 }}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.85 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{
@@ -193,14 +204,11 @@ export function ArchitectureDiagram({
           </div>
 
           {/* Mobile: simple stacked list */}
-          <div className="flex flex-col gap-3 md:hidden">
+          <div className="relative flex flex-col gap-3 md:hidden">
             {architecture.nodes.map((node, ni) => (
               <motion.div
                 key={node.id}
-                ref={(el) => {
-                  if (el) nodeRefs.current.set(node.id, el);
-                }}
-                className="rounded-xl border border-neutral-700/40 bg-neutral-900/80 px-4 py-3 backdrop-blur-sm"
+                className="rounded-xl border border-neutral-700/50 bg-neutral-900 px-4 py-3"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
