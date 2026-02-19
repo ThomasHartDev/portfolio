@@ -254,7 +254,7 @@ export default function ProjectDetail({
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {project.highlights.map((highlight, i) => (
               <motion.div
-                key={highlight}
+                key={highlight.title}
                 className="group relative rounded-xl border border-neutral-800/50 bg-neutral-900/50 p-6 backdrop-blur-sm transition-all duration-500 hover:border-indigo-500/20 hover:bg-neutral-900/80"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -268,8 +268,11 @@ export default function ProjectDetail({
                 <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-sm font-bold text-indigo-400">
                   {String(i + 1).padStart(2, "0")}
                 </div>
-                <p className="text-sm leading-relaxed text-neutral-400 group-hover:text-neutral-300">
-                  {highlight}
+                <h4 className="mb-1.5 text-sm font-semibold text-neutral-200">
+                  {highlight.title}
+                </h4>
+                <p className="text-sm leading-relaxed text-neutral-500 group-hover:text-neutral-400">
+                  {highlight.description}
                 </p>
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               </motion.div>
