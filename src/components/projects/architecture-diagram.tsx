@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FadeIn } from "@/components/ui/fade-in";
+import { NodeTooltip } from "@/components/ui/node-tooltip";
 import type { Architecture } from "@/data/projects";
 
 interface EdgePath {
@@ -21,6 +22,8 @@ export function ArchitectureDiagram({
   const nodeRefs = useRef(new Map<string, HTMLDivElement>());
   const [edgePaths, setEdgePaths] = useState<EdgePath[]>([]);
   const [measured, setMeasured] = useState(false);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null);
 
   const rowCount = useMemo(
     () => Math.max(...architecture.nodes.map((n) => n.row)) + 1,
@@ -182,10 +185,22 @@ export function ArchitectureDiagram({
                 ref={(el) => {
                   if (el) nodeRefs.current.set(node.id, el);
                 }}
-                className="flex flex-col items-center justify-center rounded-xl border border-neutral-700/50 bg-neutral-900 px-4 py-3 text-center shadow-lg shadow-black/20 transition-all duration-300 hover:border-indigo-500/40 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)]"
+                className={`flex flex-col items-center justify-center rounded-xl border border-neutral-700/50 bg-neutral-900 px-4 py-3 text-center shadow-lg shadow-black/20 transition-all duration-300 hover:border-indigo-500/40 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] ${node.rationale ? "cursor-pointer" : ""}`}
                 style={{
                   gridRow: node.row + 1,
                   gridColumn: node.col,
+                }}
+                onMouseEnter={(e) => {
+                  if (node.rationale) {
+                    setHoveredNode(node.id);
+                    setHoveredRect(
+                      (e.currentTarget as HTMLDivElement).getBoundingClientRect(),
+                    );
+                  }
+                }}
+                onMouseLeave={() => {
+                  setHoveredNode(null);
+                  setHoveredRect(null);
                 }}
                 initial={{ opacity: 0, scale: 0.85 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -230,6 +245,16 @@ export function ArchitectureDiagram({
               </motion.div>
             ))}
           </div>
+
+          {/* Hover tooltip — rendered via portal to escape overflow */}
+          <NodeTooltip
+            content={
+              architecture.nodes.find((n) => n.id === hoveredNode)?.rationale ??
+              ""
+            }
+            anchor={hoveredRect}
+            visible={hoveredNode !== null}
+          />
         </div>
       </div>
     </div>
