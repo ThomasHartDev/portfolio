@@ -2,6 +2,7 @@ export interface ArchNode {
   id: string;
   label: string;
   subtitle?: string;
+  rationale?: string;
   row: number;
   col: number;
 }
@@ -60,6 +61,7 @@ export const projects: Project[] = [
     featured: true,
     image: "/images/projects/pixel-wand.png",
     heroImage: "/images/projects/pixelwand-hero.png",
+    liveUrl: "https://www.pixel-wand.com",
     gallery: ["/images/logos/pixel-wand.png"],
     highlights: [
       { title: "SaaS Billing", description: "Full Stripe integration with tiered subscriptions and usage-based billing" },
@@ -72,14 +74,14 @@ export const projects: Project[] = [
     status: "active",
     architecture: {
       nodes: [
-        { id: "app", label: "Next.js App", subtitle: "Frontend", row: 0, col: 3 },
-        { id: "api", label: "API Routes", subtitle: "REST API", row: 1, col: 2 },
-        { id: "webhooks", label: "Stripe Webhooks", subtitle: "Event Handler", row: 1, col: 4 },
-        { id: "sharp", label: "Sharp Pipeline", subtitle: "Image Processing", row: 2, col: 2 },
-        { id: "billing", label: "Stripe Billing", subtitle: "Payments", row: 2, col: 4 },
-        { id: "r2", label: "Cloudflare R2", subtitle: "Object Storage", row: 3, col: 1 },
-        { id: "db", label: "PostgreSQL", subtitle: "Database", row: 3, col: 3 },
-        { id: "keys", label: "API Key Store", subtitle: "Auth", row: 3, col: 5 },
+        { id: "app", label: "Next.js App", subtitle: "Frontend", rationale: "Next.js for the full-stack combo — SSR for the marketing pages, API routes for the backend, all in one deploy.", row: 0, col: 3 },
+        { id: "api", label: "API Routes", subtitle: "REST API", rationale: "Next.js API routes keep the backend co-located with the frontend. No separate server to deploy or maintain.", row: 1, col: 2 },
+        { id: "webhooks", label: "Stripe Webhooks", subtitle: "Event Handler", rationale: "Stripe pushes subscription events via webhooks — this handler verifies signatures and syncs billing state to the DB.", row: 1, col: 4 },
+        { id: "sharp", label: "Sharp Pipeline", subtitle: "Image Processing", rationale: "Sharp over Jimp or ImageMagick — it's the fastest Node.js image processor, backed by libvips. Handles WebP/AVIF natively without loading entire files into memory.", row: 2, col: 2 },
+        { id: "billing", label: "Stripe Billing", subtitle: "Payments", rationale: "Stripe is the standard for subscription billing. Handles tiered pricing, usage metering, and invoicing out of the box.", row: 2, col: 4 },
+        { id: "r2", label: "Cloudflare R2", subtitle: "Object Storage", rationale: "R2 over S3 for zero egress fees. Presigned URLs keep files off the server — uploads go straight from browser to bucket.", row: 3, col: 1 },
+        { id: "db", label: "PostgreSQL", subtitle: "Database", rationale: "Relational data with strict schemas — user accounts, subscriptions, API keys, and usage records need referential integrity.", row: 3, col: 3 },
+        { id: "keys", label: "API Key Store", subtitle: "Auth", rationale: "Hashed API keys with per-key rate limits and usage tracking. Developers can rotate keys without downtime.", row: 3, col: 5 },
       ],
       edges: [
         { from: "app", to: "api", label: "REST" },
@@ -126,14 +128,14 @@ export const projects: Project[] = [
     status: "active",
     architecture: {
       nodes: [
-        { id: "ui", label: "Next.js App", subtitle: "Frontend", row: 0, col: 3 },
-        { id: "maps", label: "D3.js Maps", subtitle: "Visualization", row: 1, col: 1 },
-        { id: "filters", label: "Filter Engine", subtitle: "Query Builder", row: 1, col: 3 },
-        { id: "api", label: "API Routes", subtitle: "REST API", row: 1, col: 5 },
-        { id: "agg", label: "Aggregation Engine", subtitle: "Data Processing", row: 2, col: 2 },
-        { id: "provenance", label: "Provenance Tracker", subtitle: "Edit History", row: 2, col: 4 },
-        { id: "cache", label: "Cache Layer", subtitle: "Performance", row: 3, col: 2 },
-        { id: "db", label: "PostgreSQL", subtitle: "Database", row: 3, col: 4 },
+        { id: "ui", label: "Next.js App", subtitle: "Frontend", rationale: "Next.js for SSR — crime data pages need to be crawlable by search engines and share with rich previews.", row: 0, col: 3 },
+        { id: "maps", label: "D3.js Maps", subtitle: "Visualization", rationale: "D3 over Mapbox or Leaflet for full control over the choropleth rendering. Custom color scales and drill-down behavior that map libraries don't support well.", row: 1, col: 1 },
+        { id: "filters", label: "Filter Engine", subtitle: "Query Builder", rationale: "Complex multi-dimension filters (demographics, geography, weapons, time) need a composable query builder that translates to SQL.", row: 1, col: 3 },
+        { id: "api", label: "API Routes", subtitle: "REST API", rationale: "Co-located API routes keep data fetching simple. REST over GraphQL because the query patterns are well-defined.", row: 1, col: 5 },
+        { id: "agg", label: "Aggregation Engine", subtitle: "Data Processing", rationale: "Raw SQL aggregation over ORM queries — Prisma can't express the complex GROUP BY and window functions needed for 800K+ row analytics.", row: 2, col: 2 },
+        { id: "provenance", label: "Provenance Tracker", subtitle: "Edit History", rationale: "Field-level edit tracking so every data correction is auditable. Community contributions need source citations and a full revision history.", row: 2, col: 4 },
+        { id: "cache", label: "Cache Layer", subtitle: "Performance", rationale: "Expensive aggregation queries get cached to avoid re-processing 800K rows on every request. Invalidates when new data or corrections come in.", row: 3, col: 2 },
+        { id: "db", label: "PostgreSQL", subtitle: "Database", rationale: "Postgres for relational integrity across records, corrections, and user contributions. Strong aggregation performance with proper indexing.", row: 3, col: 4 },
       ],
       edges: [
         { from: "ui", to: "maps", label: "GeoJSON" },
@@ -181,14 +183,14 @@ export const projects: Project[] = [
     status: "active",
     architecture: {
       nodes: [
-        { id: "nuxt", label: "Nuxt 3 SSR", subtitle: "Frontend", row: 0, col: 3 },
-        { id: "routes", label: "Server Routes", subtitle: "API Layer", row: 1, col: 2 },
-        { id: "lambda", label: "AWS Lambda", subtitle: "Serverless", row: 1, col: 4 },
-        { id: "blog", label: "Blog Engine", subtitle: "Content", row: 2, col: 1 },
-        { id: "portal", label: "Customer Portal", subtitle: "Dashboard", row: 2, col: 3 },
-        { id: "invoices", label: "Invoice System", subtitle: "Billing", row: 2, col: 5 },
-        { id: "mongo", label: "MongoDB", subtitle: "Database", row: 3, col: 2 },
-        { id: "s3", label: "AWS S3", subtitle: "File Storage", row: 3, col: 4 },
+        { id: "nuxt", label: "Nuxt 3 SSR", subtitle: "Frontend", rationale: "Nuxt 3 over Next.js because the team already had Vue expertise. SSR for SEO on the marketing pages and blog.", row: 0, col: 3 },
+        { id: "routes", label: "Server Routes", subtitle: "API Layer", rationale: "Nuxt server routes give you a built-in API layer — no need for a separate Express server.", row: 1, col: 2 },
+        { id: "lambda", label: "AWS Lambda", subtitle: "Serverless", rationale: "Lambda for background jobs like PDF generation and email sends. Pay-per-invocation keeps costs near zero for a small business.", row: 1, col: 4 },
+        { id: "blog", label: "Blog Engine", subtitle: "Content", rationale: "In-house blog engine over WordPress or Ghost for full control over SEO markup and design. Content stored in MongoDB for flexible schemas.", row: 2, col: 1 },
+        { id: "portal", label: "Customer Portal", subtitle: "Dashboard", rationale: "Clients track projects, invoices, and deliverables in one place. Keeps communication out of email and into a structured flow.", row: 2, col: 3 },
+        { id: "invoices", label: "Invoice System", subtitle: "Billing", rationale: "Custom invoicing over Stripe Invoices for more control over branding and line-item flexibility.", row: 2, col: 5 },
+        { id: "mongo", label: "MongoDB", subtitle: "Database", rationale: "MongoDB for the flexible document model — blog posts, service pages, and client data have very different shapes.", row: 3, col: 2 },
+        { id: "s3", label: "AWS S3", subtitle: "File Storage", rationale: "S3 for client deliverables and invoice PDFs. Presigned URLs for secure, time-limited downloads.", row: 3, col: 4 },
       ],
       edges: [
         { from: "nuxt", to: "routes", label: "SSR" },
@@ -223,6 +225,7 @@ export const projects: Project[] = [
     featured: true,
     image: "/images/projects/perception.png",
     heroImage: "/images/projects/perception-hero.jpg",
+    liveUrl: "https://perception-two.vercel.app",
     gallery: [],
     highlights: [
       { title: "3D Body Maps", description: "Interactive WebGL body maps where users paint emotional and physical responses" },
@@ -235,14 +238,14 @@ export const projects: Project[] = [
     status: "active",
     architecture: {
       nodes: [
-        { id: "app", label: "Next.js App", subtitle: "Frontend", row: 0, col: 2 },
-        { id: "three", label: "Three.js", subtitle: "3D Engine", row: 0, col: 4 },
-        { id: "webgl", label: "WebGL Renderer", subtitle: "GPU Rendering", row: 1, col: 4 },
-        { id: "d3", label: "D3.js Charts", subtitle: "Visualization", row: 1, col: 1 },
-        { id: "canvas", label: "Canvas API", subtitle: "Paint Input", row: 1, col: 3 },
-        { id: "emotions", label: "Emotion Mapping", subtitle: "Analysis", row: 2, col: 2 },
-        { id: "scoring", label: "Dimension Scoring", subtitle: "Metrics", row: 2, col: 4 },
-        { id: "idb", label: "IndexedDB", subtitle: "Local Storage", row: 3, col: 3 },
+        { id: "app", label: "Next.js App", subtitle: "Frontend", rationale: "Next.js for the app shell and routing. The 3D interactions are client-side, but SSR helps with the landing and onboarding pages.", row: 0, col: 2 },
+        { id: "three", label: "Three.js", subtitle: "3D Engine", rationale: "Three.js over Babylon.js for a lighter footprint. The body map doesn't need a full game engine — just smooth mesh rendering and raycasting.", row: 0, col: 4 },
+        { id: "webgl", label: "WebGL Renderer", subtitle: "GPU Rendering", rationale: "WebGL for GPU-accelerated rendering of the 3D body model. Canvas 2D can't handle real-time mesh shading and particle effects.", row: 1, col: 4 },
+        { id: "d3", label: "D3.js Charts", subtitle: "Visualization", rationale: "D3 for the radar charts — full control over the SVG paths, axis labels, and animation. Chart.js couldn't handle the custom multi-axis layout.", row: 1, col: 1 },
+        { id: "canvas", label: "Canvas API", subtitle: "Paint Input", rationale: "Canvas 2D for the paint-on-body interaction. Users draw freehand to mark where they feel sensations — needs pixel-level precision.", row: 1, col: 3 },
+        { id: "emotions", label: "Emotion Mapping", subtitle: "Analysis", rationale: "Maps painted body regions to emotional categories using a research-backed mapping between somatic locations and feelings.", row: 2, col: 2 },
+        { id: "scoring", label: "Dimension Scoring", subtitle: "Metrics", rationale: "Scores relationship across 8 dimensions (trust, attraction, safety, etc.) derived from the body map data and questionnaire responses.", row: 2, col: 4 },
+        { id: "idb", label: "IndexedDB", subtitle: "Local Storage", rationale: "IndexedDB over a server database — relationship data is deeply personal. Everything stays on-device, nothing leaves the browser.", row: 3, col: 3 },
       ],
       edges: [
         { from: "app", to: "three", label: "3D Models" },
@@ -294,14 +297,14 @@ export const projects: Project[] = [
     status: "active",
     architecture: {
       nodes: [
-        { id: "nuxt", label: "Nuxt 3 Storefront", subtitle: "Frontend", row: 0, col: 3 },
-        { id: "routes", label: "Server Routes", subtitle: "API Layer", row: 1, col: 2 },
-        { id: "paypal", label: "PayPal API", subtitle: "Payments", row: 1, col: 4 },
-        { id: "affiliate", label: "Affiliate Engine", subtitle: "Tracking", row: 2, col: 1 },
-        { id: "wishlist", label: "Wishlist Manager", subtitle: "User Prefs", row: 2, col: 3 },
-        { id: "reviews", label: "Review System", subtitle: "UGC", row: 2, col: 5 },
-        { id: "mongo", label: "MongoDB", subtitle: "Database", row: 3, col: 2 },
-        { id: "s3", label: "AWS S3", subtitle: "File Storage", row: 3, col: 4 },
+        { id: "nuxt", label: "Nuxt 3 Storefront", subtitle: "Frontend", rationale: "Nuxt 3 for server-rendered product pages — crucial for SEO on product listings and editorial reviews.", row: 0, col: 3 },
+        { id: "routes", label: "Server Routes", subtitle: "API Layer", rationale: "Nuxt server routes handle cart operations and product queries without a separate backend service.", row: 1, col: 2 },
+        { id: "paypal", label: "PayPal API", subtitle: "Payments", rationale: "PayPal for broad buyer trust and one-click checkout. Lower friction than entering card details for a curated product marketplace.", row: 1, col: 4 },
+        { id: "affiliate", label: "Affiliate Engine", subtitle: "Tracking", rationale: "Custom affiliate tracking to handle both Amazon Associates links and direct brand partnerships with different commission structures.", row: 2, col: 1 },
+        { id: "wishlist", label: "Wishlist Manager", subtitle: "User Prefs", rationale: "Persistent wishlists encourage return visits. Stored per-user in MongoDB with optional email reminders for price drops.", row: 2, col: 3 },
+        { id: "reviews", label: "Review System", subtitle: "UGC", rationale: "First-party reviews over importing from Amazon — builds trust and original content that helps SEO.", row: 2, col: 5 },
+        { id: "mongo", label: "MongoDB", subtitle: "Database", rationale: "MongoDB for the flexible product schema — office accessories, tech gadgets, and furniture all have wildly different attribute sets.", row: 3, col: 2 },
+        { id: "s3", label: "AWS S3", subtitle: "File Storage", rationale: "S3 for product images and review photos. CloudFront CDN in front for fast delivery worldwide.", row: 3, col: 4 },
       ],
       edges: [
         { from: "nuxt", to: "routes", label: "Cart Ops" },
@@ -349,13 +352,13 @@ export const projects: Project[] = [
     status: "active",
     architecture: {
       nodes: [
-        { id: "nuxt", label: "Nuxt 3 App", subtitle: "Frontend", row: 0, col: 3 },
-        { id: "routes", label: "Server Routes", subtitle: "API Layer", row: 1, col: 1 },
-        { id: "paypal", label: "PayPal API", subtitle: "Payments", row: 1, col: 3 },
-        { id: "lambda", label: "AWS Lambda", subtitle: "Background Jobs", row: 1, col: 5 },
-        { id: "inventory", label: "Inventory Manager", subtitle: "Stock Tracking", row: 2, col: 2 },
-        { id: "orders", label: "Order Pipeline", subtitle: "Fulfillment", row: 2, col: 4 },
-        { id: "mongo", label: "MongoDB", subtitle: "Database", row: 3, col: 3 },
+        { id: "nuxt", label: "Nuxt 3 App", subtitle: "Frontend", rationale: "Nuxt 3 for SSR — auto parts product pages need to rank on Google. Consistent with the other ecommerce stores in the portfolio.", row: 0, col: 3 },
+        { id: "routes", label: "Server Routes", subtitle: "API Layer", rationale: "Built-in Nuxt server routes for the product API, cart logic, and order management. Keeps everything in one deployment.", row: 1, col: 1 },
+        { id: "paypal", label: "PayPal API", subtitle: "Payments", rationale: "PayPal for trusted checkout in the auto parts space where buyers prefer established payment methods.", row: 1, col: 3 },
+        { id: "lambda", label: "AWS Lambda", subtitle: "Background Jobs", rationale: "Lambda for async order processing, inventory syncs, and email notifications. Scales to zero when there's no traffic.", row: 1, col: 5 },
+        { id: "inventory", label: "Inventory Manager", subtitle: "Stock Tracking", rationale: "Tracks stock levels, variants (sizes, fitments), and auto-flags low-stock items. Auto parts have complex variant matrices.", row: 2, col: 2 },
+        { id: "orders", label: "Order Pipeline", subtitle: "Fulfillment", rationale: "Multi-step order flow from payment confirmation through fulfillment and shipping notification.", row: 2, col: 4 },
+        { id: "mongo", label: "MongoDB", subtitle: "Database", rationale: "MongoDB for flexible product documents — auto parts have dozens of fitment attributes that vary wildly between categories.", row: 3, col: 3 },
       ],
       edges: [
         { from: "nuxt", to: "routes", label: "REST" },
@@ -405,13 +408,13 @@ export const projects: Project[] = [
     status: "active",
     architecture: {
       nodes: [
-        { id: "nuxt", label: "Nuxt 3 App", subtitle: "Frontend", row: 0, col: 3 },
-        { id: "routes", label: "Server Routes", subtitle: "API Layer", row: 1, col: 2 },
-        { id: "verify", label: "Verification API", subtitle: "Receipt Check", row: 1, col: 4 },
-        { id: "reviews", label: "Review Engine", subtitle: "Aggregation", row: 2, col: 1 },
-        { id: "compare", label: "Comparison Builder", subtitle: "Diffing", row: 2, col: 3 },
-        { id: "cred", label: "Credibility Scorer", subtitle: "Trust Metrics", row: 2, col: 5 },
-        { id: "mongo", label: "MongoDB", subtitle: "Database", row: 3, col: 3 },
+        { id: "nuxt", label: "Nuxt 3 App", subtitle: "Frontend", rationale: "Nuxt 3 for SSR — product review pages need search engine visibility. Vue ecosystem for consistency across the store platforms.", row: 0, col: 3 },
+        { id: "routes", label: "Server Routes", subtitle: "API Layer", rationale: "Nuxt server routes for the review API, user accounts, and comparison data. No separate backend needed.", row: 1, col: 2 },
+        { id: "verify", label: "Verification API", subtitle: "Receipt Check", rationale: "Receipt validation to ensure only real buyers can leave reviews. Prevents the fake review problem that kills trust.", row: 1, col: 4 },
+        { id: "reviews", label: "Review Engine", subtitle: "Aggregation", rationale: "Custom aggregation pipeline for multi-criteria ratings. Surfaces helpful reviews and weights verified purchases higher.", row: 2, col: 1 },
+        { id: "compare", label: "Comparison Builder", subtitle: "Diffing", rationale: "Side-by-side product comparison with normalized specs. Pulls attributes from different product schemas into a unified view.", row: 2, col: 3 },
+        { id: "cred", label: "Credibility Scorer", subtitle: "Trust Metrics", rationale: "User trust scores based on review history, verification rate, and helpfulness votes. Reduces influence of low-quality reviewers.", row: 2, col: 5 },
+        { id: "mongo", label: "MongoDB", subtitle: "Database", rationale: "MongoDB for flexible review and product schemas — different product categories have completely different attribute sets.", row: 3, col: 3 },
       ],
       edges: [
         { from: "nuxt", to: "routes", label: "REST" },
@@ -458,14 +461,14 @@ export const projects: Project[] = [
     status: "active",
     architecture: {
       nodes: [
-        { id: "next", label: "Next.js App", subtitle: "Frontend", row: 0, col: 2 },
-        { id: "motion", label: "Framer Motion", subtitle: "Animations", row: 0, col: 4 },
-        { id: "api", label: "API Routes", subtitle: "Backend", row: 1, col: 3 },
-        { id: "zod", label: "Zod Validation", subtitle: "Schema Guard", row: 1, col: 5 },
-        { id: "contact", label: "Contact Pipeline", subtitle: "Lead Intake", row: 2, col: 2 },
-        { id: "portfolio", label: "Portfolio Engine", subtitle: "Case Studies", row: 2, col: 4 },
-        { id: "edge", label: "Vercel Edge Config", subtitle: "Runtime Config", row: 3, col: 2 },
-        { id: "cdn", label: "Image CDN", subtitle: "Static Assets", row: 3, col: 4 },
+        { id: "next", label: "Next.js App", subtitle: "Frontend", rationale: "Next.js for the marketing site — SSR for SEO, App Router for layouts, and API routes for the contact pipeline.", row: 0, col: 2 },
+        { id: "motion", label: "Framer Motion", subtitle: "Animations", rationale: "Framer Motion over CSS animations for orchestrated scroll-triggered sequences. The case study reveals and page transitions need precise timing control.", row: 0, col: 4 },
+        { id: "api", label: "API Routes", subtitle: "Backend", rationale: "Next.js API routes handle the contact form, lead routing, and portfolio data. Keeps everything in one Vercel deployment.", row: 1, col: 3 },
+        { id: "zod", label: "Zod Validation", subtitle: "Schema Guard", rationale: "Zod validates all form inputs server-side. The multi-step onboarding flow needs strict schema enforcement at each step.", row: 1, col: 5 },
+        { id: "contact", label: "Contact Pipeline", subtitle: "Lead Intake", rationale: "Multi-step intake that qualifies leads before they reach the team. Collects project scope, budget range, and timeline upfront.", row: 2, col: 2 },
+        { id: "portfolio", label: "Portfolio Engine", subtitle: "Case Studies", rationale: "Structured data for each project — metrics, tech stack, timeline. Generates detail pages and comparison views from a single source of truth.", row: 2, col: 4 },
+        { id: "edge", label: "Vercel Edge Config", subtitle: "Runtime Config", rationale: "Edge Config for feature flags and A/B testing the landing page. Changes propagate instantly without redeploying.", row: 3, col: 2 },
+        { id: "cdn", label: "Image CDN", subtitle: "Static Assets", rationale: "Vercel's built-in image optimization for case study screenshots and project galleries. Serves WebP/AVIF at the right resolution.", row: 3, col: 4 },
       ],
       edges: [
         { from: "next", to: "motion" },

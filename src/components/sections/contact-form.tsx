@@ -131,7 +131,7 @@ export function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-7 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-indigo-600 px-7 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-500 hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === "sending" ? "Sending..." : "Send Message"}
               </button>
