@@ -102,7 +102,7 @@ export const projects: Project[] = [
     title: "MurderData",
     tagline: "Interactive homicide data exploration platform",
     description:
-      "A data-rich visualization platform for exploring homicide statistics across the US. 890K+ FBI SHR records, 25 API endpoints, 18 Drizzle tables — with interactive Recharts dashboards, filterable datasets, zodiac analysis, and a provenance schema for field-level data attribution.",
+      "A data platform for exploring US homicide statistics. 890K+ FBI SHR records queried through 25 API endpoints across 18 Drizzle tables — interactive Recharts dashboards, multi-dimension filtering, zodiac analysis, and a provenance schema for field-level data attribution.",
     longDescription:
       "MurderData is a Turborepo monorepo (apps/web, apps/api, packages/db, packages/shared) that makes FBI SHR (Supplementary Homicide Report) data explorable and visual. The Next.js frontend features 12+ interactive chart types — yearly trends, weapon breakdowns, demographic distributions, solve rates, and a zodiac analysis page. The Hono API backend exposes 25 endpoints (15 stats, 5 people, 5 cases) handling complex SQL aggregations across 890K+ records with Drizzle ORM across 18 tables. A provenance schema with Zod validators tracks field-level source attribution and confidence levels. Case detail pages include comments, and the Explore section provides deep statistical drill-downs.",
     techStack: [
@@ -395,7 +395,7 @@ export const projects: Project[] = [
     title: "Subsource",
     tagline: "B2B contractor and supplier review directory",
     description:
-      "A review platform for the commercial construction industry — contractors, subcontractors, suppliers, and agencies can be searched, reviewed, and compared. 53 API endpoints, Google OAuth with JWT tokens, reCAPTCHA v3, business profile claims, star ratings with business replies, and 80+ industry tags.",
+      "A B2B review platform for commercial construction — contractors, subcontractors, suppliers, and agencies searchable across 80+ industry tags. 53 API endpoints, Google OAuth with JWT tokens, reCAPTCHA v3, business profile claims, and star ratings with business replies.",
     longDescription:
       "Subsource is a B2B directory built to bring accountability to the commercial construction industry. Businesses can search for contractors, subcontractors, suppliers, and agencies by category across 80+ industry tags (HVAC, electrical, plumbing, concrete, etc.), leave detailed reviews with star ratings, and browse business profiles. The review system supports business replies so both sides are represented, with automatic average rating recalculation on each review. Companies can claim their profiles to manage their listings and respond to feedback. Google OAuth with JWT tokens (1-hour expiry) makes onboarding frictionless, and reCAPTCHA v3 blocks bot signups. 53 API endpoints cover the full CRUD for all entity types. Built with Nuxt 3 for SSR and search engine visibility.",
     techStack: [
@@ -454,7 +454,7 @@ export const projects: Project[] = [
     title: "Subsource Custom Software",
     tagline: "Software consultancy marketing site",
     description:
-      "The marketing site for Subsource Software — a custom software consultancy. 100% statically generated with Next.js, zero backend, zero database. Features service breakdowns, case studies with real metrics, a contact form for project inquiries, FAQ section, and polished Framer Motion animations throughout.",
+      "The marketing site for Subsource Software — a custom software consultancy. 100% statically generated with Next.js — zero backend, zero database, zero API. Service breakdowns, case studies with real metrics, a contact form for project inquiries, and polished Framer Motion scroll animations.",
     longDescription:
       "This is the client-facing site for Subsource Software — designed to convert visitors into clients. The site is 100% statically generated at build time — no backend, no database, no API routes. All content (services, case studies, testimonials, FAQ) is hardcoded in TypeScript files for zero server cost and instant page loads via Vercel's CDN edge network. The site features detailed service pages for web apps, mobile, AI, and system integrations. Case studies showcase real client metrics from shipped projects. The contact form collects project scope, budget range, and details upfront (client-side only — no backend submission handler). The design emphasizes credibility with smooth Framer Motion animations, clean typography, and social proof throughout. SSG was the right call here — there's no dynamic content that needs a server.",
     techStack: [
